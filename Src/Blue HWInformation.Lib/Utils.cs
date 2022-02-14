@@ -16,5 +16,10 @@ namespace Blue_HWInformation.Lib
                 return "no";
             }
         } //end method
+
+        public static double ConvertByteToGb(ulong value)
+        {
+            return Convert.ToDouble(value / 1024 / 1024 / 1024);
+        } //end method
     }
 }

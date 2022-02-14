@@ -63,6 +63,12 @@
     <Compile Include="UserControls\CpuInfoUserControl.Designer.cs">
       <DependentUpon>CpuInfoUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\MemoryInfoUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\MemoryInfoUserControl.Designer.cs">
+      <DependentUpon>MemoryInfoUserControl.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -77,6 +83,9 @@
     </Compile>
     <EmbeddedResource Include="UserControls\CpuInfoUserControl.resx">
       <DependentUpon>CpuInfoUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\MemoryInfoUserControl.resx">
+      <DependentUpon>MemoryInfoUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">

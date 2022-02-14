@@ -1,6 +1,7 @@
 ﻿using Blue_HWInformation.Lib.Entitys;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Management;
 using System.Text;
@@ -10,7 +11,27 @@ namespace Blue_HWInformation.Lib.Information
 {
     public class HardwareInfo
     {
-
+        public async Task<List<MemoryEntity>> GetMemoryInfoAsync()
+        {
+            return await Task.Run(() =>
+            {
+                ManagementObjectSearcher query = new ManagementObjectSearcher(@"root\CIMV2", "SELECT * FROM Win32_PhysicalMemory");
+                if (query == null) throw new NullReferenceException("can not be querying about memory.");
+                var entitys = new List<MemoryEntity>();
+                foreach (var data in query.Get())
+                {
+                    var entity = new MemoryEntity();
+                    entity.BankLabel = data.GetPropertyValue("BankLabel").ToString();
+                    entity.Capacity = Utils.ConvertByteToGb((ulong)data.GetPropertyValue("Capacity"));
+                    entity.Manufacturer = data.GetPropertyValue("Manufacturer").ToString();
+                    entity.Name = data.GetPropertyValue("Name").ToString();
+                    entity.DeviceLocator = data.GetPropertyValue("DeviceLocator").ToString();
+                    entity.ConfiguredClockSpeed =(uint) data.GetPropertyValue("ConfiguredClockSpeed");
+                    entitys.Add(entity);
+                } //end for.each
+                return entitys;
+            });
+        } //end method
         public async Task<CpuEntity> GetCpuInfoAsync()
         {
             return await Task.Run(() =>
